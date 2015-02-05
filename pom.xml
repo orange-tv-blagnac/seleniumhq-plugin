@@ -4,12 +4,11 @@
 		<groupId>org.jvnet.hudson.plugins</groupId>
 		<artifactId>plugin</artifactId>
 		<version>1.366</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>seleniumhq</artifactId>
 	<packaging>hpi</packaging>
-	<version>0.5</version>
+	<version>0.8</version>
 	<name>Hudson Seleniumhq plugin</name>
 	<url>http://wiki.hudson-ci.org/display/HUDSON/Seleniumhq+Plugin</url>
 
@@ -33,6 +32,17 @@
             <url>http://repo.jenkins-ci.org/public/</url>
         </pluginRepository>
     </pluginRepositories>
+    
+    
+     <build>
+      <plugins>
+        <plugin>
+          <groupId>org.jenkins-ci.tools</groupId>
+          <artifactId>maven-hpi-plugin</artifactId>
+          <version>1.99</version>
+        </plugin>        
+      </plugins>
+    </build>
 </project>  
   
 
