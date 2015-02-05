@@ -15,6 +15,18 @@
 	                    <td>${it.result.numTestFailures}</td>
 	                </tr>
 	            </table>  
+	        </div>
+	        <div style="border: 1px solid #eee; ">
+	        
+	        	<table style="padding: 0 10px; width:200px;">
+	                <tr>	                   
+	                    <td><a href="${it.result.htmlResultFile}">HTML detailed report</a></td>
+	                </tr>
+	                <tr>	                    
+	                    <td><a href="../artifact">Logs and screenshots</a></td>
+	                </tr>
+	            </table>
+	        	        
 	        </div>            
         </l:main-panel>
     </l:layout>

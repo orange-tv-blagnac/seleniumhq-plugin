@@ -174,6 +174,8 @@ public class SeleniumhqPublisher extends Recorder implements Serializable {
         listener.getLogger().println("  Command Failures : " + action.getResult().numCommandFailures());
         listener.getLogger().println("  Command Errors   : " + action.getResult().numCommandErrors());
         
+        listener.getLogger().println("  USe test commands: " + useTestCommands);
+        
         if (useTestCommands)
         {
             if (action.getResult().numCommandFailures() > 0)
@@ -189,7 +191,7 @@ public class SeleniumhqPublisher extends Recorder implements Serializable {
         {
             if (action.getResult().getNumTestFailures() > 0)
             {
-                build.setResult(Result.UNSTABLE);
+                build.setResult(Result.FAILURE);
             }
         }
 

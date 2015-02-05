@@ -80,18 +80,27 @@ public class TestResult implements Serializable {
 		return getNumTestPasses() + getNumTestFailures();
 	}
 	
+	public String getHtmlResultFile() {
+		String results = "";
+		for (String f : resultFiles){
+			results += f;
+		}
+		return "../artifact/" + results;
+	}
+	
 	public List<String> getFiles() {
 		return files;
 	}
-
+ArrayList<String> resultFiles = new ArrayList<String>();
 	public void parse(long buildTime, DirectoryScanner results)
 			throws IOException {
 		String[] includedFiles = results.getIncludedFiles();
 		File baseDir = results.getBasedir();
 
 		boolean parsed = false;
-
+		
 		for (String value : includedFiles) {
+			resultFiles.add(value);
 			File reportFile = new File(baseDir, value);
 			// only count files that were actually updated during this build
 			if (buildTime - 1000/* error margin */<= reportFile.lastModified()) {
