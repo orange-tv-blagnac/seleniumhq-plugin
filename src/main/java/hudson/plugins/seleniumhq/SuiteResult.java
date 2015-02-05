@@ -18,23 +18,22 @@ public class SuiteResult implements Serializable {
 	private int numCommandPasses;
 	private int numCommandFailures;
 	private int numCommandErrors;
+	private String htmlResultFile = "";
 
-		
-	public SuiteResult(int numTestPasses, int numTestFailures)
-	{
+	public SuiteResult(int numTestPasses, int numTestFailures) {
 		this.numTestPasses = numTestPasses;
 		this.numTestFailures = numTestFailures;
-	}	
+	}
 
-	public SuiteResult(int numTestPasses, int numTestFailures, int numCommandPasses,
-		int numCommandFailures, int numCommandErrors)
-	{
+	public SuiteResult(int numTestPasses, int numTestFailures, int numCommandPasses, int numCommandFailures,
+			int numCommandErrors) {
 		this.numTestPasses = numTestPasses;
 		this.numTestFailures = numTestFailures;
 		this.numCommandPasses = numCommandPasses;
 		this.numCommandFailures = numCommandFailures;
 		this.numCommandErrors = numCommandErrors;
-	}	
+	}
+
 	public int getNumTestPasses() {
 		return numTestPasses;
 	}
@@ -61,48 +60,44 @@ public class SuiteResult implements Serializable {
 		int numCommandPasses = 0;
 		int numCommandFailures = 0;
 		int numCommandErrors = 0;
-		
-		BufferedReader buff = null;
-		try
-		{			
-			buff = new BufferedReader( new InputStreamReader(xmlReport));
 
-			numTestPasses = Integer.valueOf(readInfo(buff,"numTestPasses:")).intValue();
-			numTestFailures = Integer.valueOf(readInfo(buff,"numTestFailures:")).intValue();
-			numCommandPasses = Integer.valueOf(readInfo(buff,"numCommandPasses:")).intValue();
-			numCommandFailures = Integer.valueOf(readInfo(buff,"numCommandFailures:")).intValue();
-			numCommandErrors = Integer.valueOf(readInfo(buff,"numCommandErrors:")).intValue();
-			
+		BufferedReader buff = null;
+		try {
+			buff = new BufferedReader(new InputStreamReader(xmlReport));
+
+			numTestPasses = Integer.valueOf(readInfo(buff, "numTestPasses:")).intValue();
+			numTestFailures = Integer.valueOf(readInfo(buff, "numTestFailures:")).intValue();
+			numCommandPasses = Integer.valueOf(readInfo(buff, "numCommandPasses:")).intValue();
+			numCommandFailures = Integer.valueOf(readInfo(buff, "numCommandFailures:")).intValue();
+			numCommandErrors = Integer.valueOf(readInfo(buff, "numCommandErrors:")).intValue();
+
 			buff.close();
-		}
-		finally 
-		{
-			if (buff != null)
-			{
+		} finally {
+			if (buff != null) {
 				buff.close();
 			}
 		}
-		
-        return new SuiteResult(numTestPasses, numTestFailures, numCommandPasses, numCommandFailures, numCommandErrors);
-    }
-	
-	private static String readInfo(BufferedReader buff, String infoName) throws IOException
-	{
+
+		return new SuiteResult(numTestPasses, numTestFailures, numCommandPasses, numCommandFailures, numCommandErrors);
+	}
+
+	private static String readInfo(BufferedReader buff, String infoName) throws IOException {
 		String line;
 		boolean isNextLine = false;
-		while ((line = buff.readLine()) != null) 
-		{
-			if (isNextLine)
-			{				
-				return line.substring(4, line.length()-5);
+		while ((line = buff.readLine()) != null) {
+			if (isNextLine) {
+				return line.substring(4, line.length() - 5);
 			}
-			if (line.indexOf(infoName) != -1)
-			{
-				isNextLine = true;				
+			if (line.indexOf(infoName) != -1) {
+				isNextLine = true;
 			}
 		}
-		return null;		
+		return null;
 	}
 
 	private static final long serialVersionUID = 1L;
+
+	public String getHtmlResultFile() {
+		return htmlResultFile;
+	}
 }
