@@ -215,6 +215,11 @@ public class SeleniumhqBuilder extends Builder {
 
 		listener.getLogger().println("Start URL = " + startURL);
 
+		// Clean workspace
+		FilePath workspace = build.getWorkspace();
+		listener.error("Cleaning workspace : " + workspace.getBaseName());
+		workspace.deleteContents();
+
 		String startURLResolved = substituteVars(startURL, build, listener.getLogger());
 		String suiteFileResolved = substituteVars(suiteFile, build, listener.getLogger());
 		String resultFileResolved = substituteVars(resultFile, build, listener.getLogger());
